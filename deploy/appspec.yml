@@ -1,0 +1,15 @@
+version: 1.0.0
+os: linux
+files:
+  - source: target/apps.jar
+    destination: /var/src/
+    overwrite: yes
+hooks:
+  ApplicationStop:
+    - location: scripts/appstop.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/appstart.sh
+      timeout: 300
+      runas: root
