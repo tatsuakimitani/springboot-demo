@@ -13,7 +13,7 @@ public class HelloController {
 	}
 	@RequestMapping("/list")
 	public String list() {
-		String message = "list";
+		String message = "list test";
 		return message;
 	}
 }
