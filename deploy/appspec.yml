@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: demo-0.0.1-SNAPSHOT.jar
+  - source: demo.jar
     destination: /var/myapp/
     overwrite: yes
 hooks:
