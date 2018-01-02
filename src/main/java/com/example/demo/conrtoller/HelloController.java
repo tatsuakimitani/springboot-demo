@@ -8,12 +8,17 @@ public class HelloController {
 
 	@RequestMapping("/hello")
 	public String hello() {
-		String message = "hello world!!";
+		String message = "hello world!!!";
 		return message;
 	}
 	@RequestMapping("/list")
 	public String list() {
 		String message = "list test2";
+		return message;
+	}
+	@RequestMapping("/world")
+	public String world() {
+		String message = "world";
 		return message;
 	}
 }
