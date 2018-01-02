@@ -1,2 +1,2 @@
 #!/bin/sh
-sudo service demo stop
+service demo stop

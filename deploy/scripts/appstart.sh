@@ -1,2 +1,3 @@
 #!/bin/sh
-sudo service demo start
+chmod u+x /var/myapp/demo.jar
+service demo start
