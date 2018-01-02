@@ -1,2 +1,2 @@
 #!/bin/sh
-service demo start
+sudo service demo start
