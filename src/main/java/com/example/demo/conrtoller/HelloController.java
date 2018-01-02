@@ -11,4 +11,9 @@ public class HelloController {
 		String message = "hello world";
 		return message;
 	}
+	@RequestMapping("/list")
+	public String list() {
+		String message = "list";
+		return message;
+	}
 }
