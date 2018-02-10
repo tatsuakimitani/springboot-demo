@@ -1,0 +1,32 @@
+version: 0.1
+ 
+phases:
+  install:
+    commands:
+      - curl -L "https://github.com/docker/compose/releases/download/1.19.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
+  pre_build:
+    commands:
+      - docker-compose --version
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION)
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker-compose build 
+      - echo Tagging the Docker image...
+      - docker images
+      - docker tag docker-demo $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/docker-demo:v1.0
+      - docker images
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/docker-demo:v1.0
+      - echo Finish pushing the Docker image...
+artifacts:
+  type: zip
+  files:
+    - scripts/docker*.sh
+    - appspec.yml
+    - docker-compose.yml
