@@ -19,7 +19,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Tagging the Docker image...
-      - docker tag dockekr-demo:v1.0 $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/docker-demo:v1.0
+      - docker tag docker-demo:v1.0 $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/docker-demo:v1.0
       - docker images
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/docker-demo:v1.0
