@@ -30,3 +30,4 @@ artifacts:
     - scripts/docker*.sh
     - appspec.yml
     - docker-compose.yml
+    - imagedefinitions.json
