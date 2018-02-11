@@ -18,7 +18,7 @@ phases:
       - docker-compose build 
       - docker images
       - echo Tagging the Docker image...
-      - docker tag ${IMAGE_NAME}:v1.0 $REPOSITORY_URI:$IMAGE_TAG
+      - docker tag docker-demo:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
