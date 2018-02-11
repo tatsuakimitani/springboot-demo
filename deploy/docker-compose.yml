@@ -2,6 +2,6 @@ version: '2'
 services:
     docker-demo:
         build: .
-        image: docker-demo:latest
+        image: docker/demo:latest
         ports:
             - "18080:8080"
