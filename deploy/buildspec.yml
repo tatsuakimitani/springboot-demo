@@ -9,21 +9,25 @@ phases:
       - docker-compose --version
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - REPOSITORY_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_NAME}
+      - IMAGE_TAG=v1.0
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker-compose build 
       - docker images
+      - echo Tagging the Docker image...
+      - docker tag ${IMAGE_NAME}:v1.0 $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Tagging the Docker image...
-      - docker tag docker-demo:v1.0 $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/docker-demo:v1.0
       - docker images
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/docker-demo:v1.0
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Finish pushing the Docker image...
+      - echo Writing image definitions file...
+      - echo "[{\"name\":\"${IMAGE_NAME}\",\"imageUri\":\"${REPOSITORY_URI}:${IMAGE_TAG}\"}]" > imagedefinitions.json
 artifacts:
   type: zip
   files:
