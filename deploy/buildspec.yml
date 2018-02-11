@@ -18,15 +18,15 @@ phases:
       - docker-compose build 
       - docker images
       - echo Tagging the Docker image...
-      - docker tag ${IMAGE_NAME}:latest $REPOSITORY_URI:$IMAGE_TAG
       - docker tag ${IMAGE_NAME}:latest $REPOSITORY_URI:latest
+      - docker tag ${IMAGE_NAME}:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
       - docker images
       - echo Pushing the Docker image...
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
       - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Finish pushing the Docker image...
       - echo Writing image definitions file...
       - echo "[{\"name\":\"${IMAGE_NAME}\",\"imageUri\":\"${REPOSITORY_URI}:${IMAGE_TAG}\"}]" > imagedefinitions.json
